@@ -62,10 +62,12 @@ database.ref().on("value", function(snapshot){
 		next.append(value.nextArr);
 		row.append(next);
 		var min = $("<td>");
-		var time = new Date();
-		var awayTime = time.getHours();
-		var minutesAway = nextArr.value - awayTime;
-		min.append(minutesAway);
+		////calculate minutes away
+		var currentTime = moment();
+		var diffTime = moment().diff(moment(nextArr), "minutes");
+		/////////////////////////////////
+		
+		min.append(diffTime);
 		row.append(min);
 		///////////////append row to body
 		$("tbody").append(row);
@@ -73,15 +75,3 @@ database.ref().on("value", function(snapshot){
 });
 
 
-/*function timeNow(i) {
-  var d = new Date(),
-      h = (d.getHours()<10?'0':'') + d.getHours(),
-      m = (d.getMinutes()<10?'0':'') + d.getMinutes();
-  i.value = h + ':' + m;
-}
-<a onclick="timeNow(test1)" href="#">SET TIME</a>
-<input id="test1" type="time" value="10:40"/>
-
-<br/>
-<a onclick="timeNow(test2)" href="#">SET TIME</a>
-<input id="test2" type="time" value="10:40"/>*/
